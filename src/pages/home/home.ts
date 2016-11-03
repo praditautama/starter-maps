@@ -36,4 +36,13 @@ export class HomePage {
  
   }
 
+  addMarker(){
+ 
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+  }
+
 }
