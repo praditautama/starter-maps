@@ -68,7 +68,14 @@ Jika berhasil menjadi APK tanpa error, maka laptop siap untuk development. APK b
 DIRECTORY_IONIC_PROJECT/platforms/android/build/outputs/apk/android-debug.apk
 ```
 
-Sideload atau install ke Android menggunakan kabel data atau bisa langsung download di http://bit.ly/2fkhMKo 
+Sideload atau install ke Android menggunakan kabel data.
+
+---
+
+
+# TLDR;
+Tutorial ini menghasilkan aplikasi peta menggunakan Google Maps dengan fitur GeoLocation dan menambahkan `marker` hanya dengan tap di peta.
+Download aplikasi Androidnya di http://bit.ly/2fkhMKo 
 
 ---
 
