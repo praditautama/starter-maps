@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
+import { Geolocation } from 'ionic-native';
+
 declare var google;
 
 @Component({
@@ -34,6 +36,19 @@ export class HomePage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     google.maps.event.trigger(this.map, 'resize');
  
+  }
+
+  getLocation(){
+    let locationOptions = {timeout: 10000, enableHighAccuracy: true};
+    
+    Geolocation.getCurrentPosition(locationOptions).then((position) => {
+      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      this.map.panTo(latLng);
+    }, (error) => {
+      console.log('tidak dapat koordinat GPS');
+      console.log(error);
+    });
+    
   }
 
   addMarker(){
