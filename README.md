@@ -212,6 +212,9 @@ ionic serve --lab
 ```
 
 Aplikasi Anda akan menampilkan peta seperti dibawah ini
+![alt text](https://gitlab.com/pradita.utama/starter-maps/raw/7672d3867420a593690a47e3de57b9998b5e711d/tutorial-images/step0-1.PNG "ionic serve --lab")
 
-
-Step 1 sudah selesai, untuk hasil akh
+Step 1 sudah selesai, untuk hasil akhir bisa checkout di 
+```
+git checkout step1
+```
