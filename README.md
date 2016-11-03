@@ -70,8 +70,9 @@ DIRECTORY_IONIC_PROJECT/platforms/android/build/outputs/apk/android-debug.apk
 
 Sideload atau install ke Android menggunakan kabel data atau bisa langsung download di http://bit.ly/2fkhMKo 
 
+---
 
-# Tutorial Step 0
+# Tutorial Step 1
 
 Perintah command-line di tutorial ini menggunakan Windows, jika menggunakan Linux/macOS diharapkan menyesuaikan seperti tanda "/" atau "\".
 
@@ -99,3 +100,118 @@ ionic serve --lab
 
 perintah dengan argument `--lab` akan menampilkan aplikasi menjadi tiga tampilan yaitu Android, iOS, dan Windows Phone.
 
+![alt text](https://gitlab.com/pradita.utama/starter-maps/raw/a87e5dc3866bae25b4d529312f1700c1cadb9832/tutorial-images/step0.PNG "ionic serve --lab")
+
+## Menambahkan library Google Maps
+Pada tutorial ini kita akan menggunakan library Google Maps V3 Javascript. Informasi lengkap tentang library ini bisa dilihat di ​
+https://developers.google.com/maps/documentation/javascript/reference
+
+Pada editor favorit Anda, edit file `index.html` dan tambahkan library seperti di bawah ini
+```javascript
+...
+  
+<!-- cordova.js required for cordova apps -->
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyA0So2LOCHpDqAFPdNMWWNTSBZEFTj0sqY"></script>
+<script src="cordova.js"></script>
+
+...
+```
+
+Sebaiknya Anda menggunakan API Key milik sendiri dengan mendaftarkan di https://console.developers.google.com/ . Tapi untuk saat ini gunakan API Key di atas saja.
+
+Kemudian edit file 'home.html' yang berada di direktori `/pages/home` menjadi seperti ini
+
+```html
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ini Adalah Peta
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div #map id="map"></div>
+</ion-content>
+```
+
+`<div #map id="map"></div>` adalah tempat kita akan menaruh peta kita di aplikasi. Masih di direktori `pages/home`, edit file `home.ts` menjadi
+
+```javascript
+import { Component, ViewChild, ElementRef } from '@angular/core';
+
+import { NavController } from 'ionic-angular';
+
+declare var google; // deklarasi variable "google" 
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  @ViewChild('map') mapElement: ElementRef; 
+  map: any;
+ 
+  constructor(public navCtrl: NavController) {
+ 
+  }
+ 
+  ionViewDidEnter(){
+    this.loadMap();
+  }
+ 
+  loadMap(){
+ 
+    let latLng = new google.maps.LatLng(-6.226267, 106.825374);
+ 
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+ 
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    google.maps.event.trigger(this.map, 'resize');
+ 
+  }
+
+}
+```
+
+**@ViewChild**
+Decorator @ViewChild digunakan untuk "mencari" element di HTML yang mempunya nama "#map", dengan @ViewChild kita bisa akses DOM element tersebut dan memanipulasinya setiap saat. @ViewChild harus kita import dari `angular/core`
+
+
+```javascript
+ionViewDidEnter(){
+    
+}
+```
+Kode diatas menggunakan `ionViewDidEnter` karena menjamin view saat ini yaitu halaman `home.html` telah sepenuhnya load. Jika kita taruh didalam `constructor` tidak ada jaminan `<div #map id="map"></div>` sudah siap sebelum Google Map load. Jika Google Maps load terlebih dahulu sedangkan `<div #map id="map"></div>` belum load, akan menjadi undefined.
+
+Sekarang, coba jalankan perintah dibawah ini
+```
+ionic serve --lab
+```
+
+Seharusnya aplikasi Anda tidak akan menampilkan peta atau blank. Karena `<div #map id="map"></div>` mempunyai height = 0 dan kita perlu ubah heightnya melalui CSS. Ubah file `home.scss` di dalam folder `pages/home` menjadi seperti dibawah ini
+```
+.scroll {
+    height: 100%;
+}
+ 
+#map {
+    width: 100%;
+    height: 100%;
+}
+```
+Sekarang, coba jalankan perintah dibawah ini lagi
+```
+ionic serve --lab
+```
+
+Aplikasi Anda akan menampilkan peta seperti dibawah ini
+
+
+Step 1 sudah selesai, untuk hasil akh
