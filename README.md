@@ -227,25 +227,25 @@ Step 1 sudah selesai, untuk hasil akhir bisa dibandingkan di branch Step 1 check
 git checkout step1
 ```
 
-##Tutorial Step 2
+## Tutorial Step 2
 
 Coming soon
 
 ---
 
-##Tutorial Step 3
+## Tutorial Step 3
 
 Coming soon
 
 ---
 
-##Tutorial Step 4
+## Tutorial Step 4
 
 Coming soon
 
 ---
 
-##Tutorial Step 5
+## Tutorial Step 5
 
 Coming soon
 
