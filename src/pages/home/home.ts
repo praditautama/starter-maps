@@ -43,6 +43,22 @@ export class HomePage {
       animation: google.maps.Animation.DROP,
       position: this.map.getCenter()
     });
+
+    let content = "<h4>Disini itu apa?</h4>";          
+ 
+    this.addInfoWindow(marker, content);
+  }
+
+  addInfoWindow(marker, content){
+ 
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+  
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+  
   }
 
 }
