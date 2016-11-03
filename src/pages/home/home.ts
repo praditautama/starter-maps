@@ -34,6 +34,16 @@ export class HomePage {
     }
  
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    google.maps.event.addListener(this.map, 'click', (event) => {
+      let marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: event.latLng
+      });
+    });
+
+
     google.maps.event.trigger(this.map, 'resize');
  
   }
