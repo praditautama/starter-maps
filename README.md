@@ -786,3 +786,4 @@ ionic upload
 * Google Maps Style Wizards https://snazzymaps.com/
 * Google Maps V3 Javascript Reference https://developers.google.com/maps/documentation/javascript/reference
 * Ionic2 Documentation http://ionicframework.com/docs/v2/
+* Angular2 Documentation https://angular.io/
