@@ -66,6 +66,7 @@ $JAVA_HOME
 ### Terakhir
 Jika semua diatas sudah dilakukan, masuk ke dalam folder direktori project Ionic, lakukan perintah ini di command-line 
 ```
+ionic start coba-aplikasi blank --v2
 ionic build android
 ```
 Jika berhasil menjadi APK tanpa error, maka laptop siap untuk development. APK berada di
