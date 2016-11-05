@@ -1,6 +1,9 @@
 # Google Maps Tutorial Menggunakan Ionic2
 
-Tutorial membuat aplikasi hybrid menggunakan Ionic dan Angular2
+Tutorial membuat aplikasi hybrid menggunakan Ionic dan Angular2. 
+
+Level : Beginner
+Tutorial Version : 1.1
 
 ## Pre-requisite
 ### Hardware
