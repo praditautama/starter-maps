@@ -737,6 +737,38 @@ Aplikasi ionic Anda sekarang bisa diuji coba di Android dan iOS tanpa perlu laku
 * Anda bisa membagikan Aplikasi dengan mencatat AppID pada Ionic View. Berikan AppID tersebut kepada teman yang sudah menginstall Ionic View. Tap pada icon "mata" dan masukkan AppID.
 * Ionic View ini berguna jika Anda ingin melakukan Prototyping tanpa perlu melakukan Build
 
+
+## Cheat Sheet Perintah Ionic Yang Sering Dipakai
+### Membuat project ionic baru. Pilih template salah satu antara BLANK (kosong), TABS, atau SIDEMENU
+```
+ionic start <NAMA_APLIKASI> blank/tabs/sidemenu --v2
+```
+
+### Menampilkan di browser
+```
+ionic serve --lab
+```
+
+### Menambahkan plugin
+```
+ionic plugin add <NAMA_PLUGIN>
+```
+
+### Membuat binary aplikasi (pilih salah satu Android, iOS, atau Windows Phone)
+```
+ionic build android/ios/windows
+```
+
+### Menampilkan aplikasi di Emulator
+```
+ionic emulate android/ios
+```
+
+### Upload ke Aplikasi Ionic View
+```
+ionic upload
+```
+
 ## Useful Links
 * Git Repo for current session https://gitlab.com/pradita.utama/starter-maps
 * Google Developer Console https://console.developers.google.com/
