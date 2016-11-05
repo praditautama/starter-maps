@@ -6,6 +6,8 @@ Level : Beginner
 
 Tutorial Version : 1.1
 
+Author : hello@praditutama.com
+
 ## Pre-requisite
 ### Hardware
 * Laptop (macOS, Linux, or Windows) dengan akses local administrator
