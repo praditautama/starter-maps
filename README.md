@@ -197,6 +197,13 @@ export class HomePage {
 
 Decorator @ViewChild digunakan untuk "mencari" element di HTML yang mempunya nama "#map", dengan @ViewChild kita bisa akses DOM element tersebut dan memanipulasinya setiap saat. @ViewChild harus kita import dari `angular/core`
 
+```javascript
+...
+
+import { Component, ViewChild, ElementRef } from '@angular/core';
+
+...
+```
 
 ```javascript
 ionViewDidEnter(){
