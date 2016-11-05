@@ -101,7 +101,7 @@ Perintah diatas akan mendownload project dan membuat folder bernama **starter-ma
 cd starter-maps
 ```
 
-Project **Step 0** ini belum memiliki library yang dibutuhkan oleh Ionic, kita perlu download semua library menggunakan perintah NPM. **Pastikan Anda memiliki koneksi internet tanpa proxy**. NPM alias Node Packages Manager adalah direktory sekumpulan library, untuk lebih detail tentang NPM bisa Anda pelajari di https://www.npmjs.com/
+Project **Step 0** ini belum memiliki library yang dibutuhkan oleh Ionic, kita perlu download semua library menggunakan perintah NPM. **Pastikan Anda memiliki koneksi internet tanpa proxy**. NPM alias Node Packages Manager adalah direktori library, untuk lebih detail tentang NPM bisa Anda pelajari di https://www.npmjs.com/
 
 ```
 npm install
