@@ -8,12 +8,12 @@ Tutorial Version : 1.1
 Author : hello@praditautama.com
 
 ## Indeks
-* [Step 1 - Create Blank Project and Add Google Maps Library](#tutorial-step1)
-* [Step 2 - Marker](#tutorial-step2)
-* [Step 3 - Info Window](#tutorial-step3)
-* [Step 4 - GeoLocation](#tutorial-step4)
-* [Step 5 - Add Dynamic Marker On Tap](#tutorial-step5)
-* [Step 6 - Build Android and iOS](#tutorial-step6)
+* [Step 1 - Create Blank Project and Add Google Maps Library](#tutorial-step-1)
+* [Step 2 - Marker](#tutorial-step-2)
+* [Step 3 - Info Window](#tutorial-step-3)
+* [Step 4 - GeoLocation](#tutorial-step-4)
+* [Step 5 - Add Dynamic Marker On Tap](#tutorial-step-5)
+* [Step 6 - Build Android and iOS](#tutorial-step-6)
 * [Bonus](#bonus)
 * [Cheat Sheet](#cheat-sheet-perintah-ionic-yang-sering-dipakai)
 * [Useful Links](#useful-links)
