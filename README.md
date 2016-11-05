@@ -1,12 +1,22 @@
 # Google Maps Tutorial Menggunakan Ionic2
 
 Tutorial membuat aplikasi hybrid menggunakan Ionic dan Angular2. 
-
 Level : Beginner
 
 Tutorial Version : 1.1
 
-Author : hello@praditutama.com
+Author : hello@praditautama.com
+
+## Indeks
+* [Step 1 - Create Blank Project and Add Google Maps Library](#tutorial-step1)
+* [Step 2 - Marker](#tutorial-step2)
+* [Step 3 - Info Window](#tutorial-step3)
+* [Step 4 - GeoLocation](#tutorial-step4)
+* [Step 5 - Add Dynamic Marker On Tap](#tutorial-step5)
+* [Step 6 - Build Android and iOS](#tutorial-step6)
+* [Bonus](#bonus)
+* [Cheat Sheet](#cheat-sheet-perintah-ionic-yang-sering-dipakai)
+* [Useful Links](#useful-links)
 
 ## Pre-requisite
 ### Hardware
