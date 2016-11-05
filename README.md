@@ -709,6 +709,8 @@ C:\PATH_KE_FOLDER\starter-maps\platforms\android\build\outputs\apk\android-debug
 Copy APK tersebut ke Android dan coba jalankan. Selamat! Anda sudah berhasil membuat aplikasi Android menggunakan Google Maps.
 Hasil akhir aplikasi bisa diunduh di http://bit.ly/2fkhMKo
 
+---
+
 ## BONUS
 Bagaimana jika kita tidak bisa atau tidak ada Android SDK dan ingin mencoba aplikasi yang kita buat di Android atau iPhone? bisa gak ya?
 
