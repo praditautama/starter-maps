@@ -229,23 +229,517 @@ git checkout step1
 
 ## Tutorial Step 2
 
-Coming soon
+Di step 2 ini kita akan menambahkan sedikit fitur di aplikasi kita, ya itu bisa menambahkan `marker` atau **tanda** di peta. 
+
+Edit file `home.html` di folder `pages/home`. Ubah script HTML menjadi seperti dibawah ini
+
+```html
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ini Adalah Peta
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>  
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div #map id="map"></div>
+</ion-content>
+```
+
+Perhatikan script HTML dibawah ini
+
+```html
+<ion-buttons end>
+  <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon></button>
+</ion-buttons>  
+```
+Kita menambahkan tombol pada header aplikasi mengunakan `<button ion-button></button>` dan memberikan fungsi / action pada tombol tersebut dengan `(click)="addMarker()"`
+
+Tanda `()` adalah untuk handling event dari template ke javascript-nya (home.ts) alias `input`. Jika kita mengharapkan `output` kita gunakan `[]`. Di jaman Angular versi 1, terkenal dengan namanya **two-way data binding**, jadi jika ada perubahan pada scope template maka ada berubah pada modelnya, juga sebaliknya. Nah, di Angular2 **two-way data binding** menggunakan sintaks `[()]` yang berarti input-ouput. 
+
+Lebih jelasnya bisa dipelajari lebih lanjut di https://angular.io/docs/ts/latest/guide/template-syntax.html#!#binding-syntax
+
+Pada tombol di atas, kita menambahkan fungsi `addMarker()`. Karena itu kita harus menambahkan fungsi tersebut di `home.ts`. Edit `home.ts` dan tambahkan seperti ini
+
+```javascript
+addMarker(){
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+  }
+```
+Fungsi di atas memanggil salah satu Class di Google Maps API yaitu `Markers`. Parameter dan option Class `Markers` bisa Anda lihat di https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions
+
+Pada fungsi `addMarker()` di atas, kita hanya menempatkan posisi `marker` pada tengah-tengah layar aplikasi menggunakan method `getCenter()`. 
+
+Full-code akan menjadi seperti dibawah ini
+```javascript
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController } from 'ionic-angular';
+declare var google;
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+ 
+  constructor(public navCtrl: NavController) {
+ 
+  }
+ 
+  ionViewDidEnter(){
+    this.loadMap();
+  }
+ 
+  loadMap(){
+    let latLng = new google.maps.LatLng(-6.226267, 106.825374);
+ 
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+ 
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    google.maps.event.trigger(this.map, 'resize');
+ 
+  }
+
+  addMarker(){
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+  }
+
+}
+```
+
+Coba jalankan aplikasinya di browser dengan menggunakan perintah `ionic serve --lab`. Jika `ionic serve` masih berjalan sebelumnya, tidak perlu mengetik `ionic serve` kembali karena perubahan di kode akan otomatis terlihat di browser. 
+
+Coba klik pada tombol `addMarker` dan `marker` akan muncul pada peta.
 
 ---
 
 ## Tutorial Step 3
 
-Coming soon
+Pada step 3 ini kita menambakan fitur kecil, yaitu menampilkan jendela informasi ketika `marker` kita tap / klik.
+
+Tambahkan kode berikut di `home.ts`
+
+```javascript
+addInfoWindow(marker, content){
+ 
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+  
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+  
+  }
+```
+dan ubah fungsi `addMarker()`, tambahkan kode berikut
+
+```javascript
+addMarker(){
+ 
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+    let content = "<h4>Disini itu apa?</h4>";          
+ 
+    this.addInfoWindow(marker, content);
+  }
+```
+
+full-code akan menjadi seperti dibawah ini
+```javascript
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController } from 'ionic-angular';
+declare var google;
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+ 
+  constructor(public navCtrl: NavController) {
+ 
+  }
+ 
+  ionViewDidEnter(){
+    this.loadMap();
+  }
+ 
+  loadMap(){
+ 
+    let latLng = new google.maps.LatLng(-6.226267, 106.825374);
+ 
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+ 
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    google.maps.event.trigger(this.map, 'resize');
+ 
+  }
+
+  addMarker(){
+ 
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+    let content = "<h4>Disini itu apa?</h4>";          
+ 
+    this.addInfoWindow(marker, content);
+  }
+
+  addInfoWindow(marker, content){
+ 
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+  
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+  
+  }
+
+}
+```
+Jalankan kembali dan lihat perubahan di browser. Coba klik pada tombol `addMarker` dan `marker` akan muncul pada peta dan coba klik markernya, akan keluar pop up informasi.
 
 ---
 
 ## Tutorial Step 4
 
-Coming soon
+Pada step 4 ini, kita akan mendeteksi posisi koordinat aplikasi kita menggunakan GPS, cool bukan? :p
+
+Sebelumnya, kita tambahkan **plugin ionic native** dengan perintah dibawah ini dan jalan lupa butuh koneksi internet untuk download plugin.
+```
+ionic add plugin cordova-plugin-geolocation
+```
+Kumpulan plugin native untuk ionic bisa Anda lihat di http://ionicframework.com/docs/v2/native/
+
+Jika plugin `cordova-plugin-geolocation` sudah berhasil diunduh. Kita ubah sedikit template HTML dengan menambahkan tombol satu lagi disebelah kiri dan tambahkan fungsi `getLocation()`
+
+```html
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="getLocation()"><ion-icon name="navigate"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>
+      Ini Adalah Peta
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>  
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div #map id="map"></div>
+</ion-content>
+
+```
+Dokumentasi tentang komponen `button` ini bisa Anda lihat di http://ionicframework.com/docs/v2/components/#buttons
+
+Template sudah kita tambahkan tombol, saatnya kita tambahkan fungsi di `home.ts`. Copas kode dibawah ini dan tambahkan di `home.ts`
+
+```javascript
+getLocation(){
+    let locationOptions = {timeout: 10000, enableHighAccuracy: true};
+    
+    Geolocation.getCurrentPosition(locationOptions).then((position) => {
+      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      this.map.panTo(latLng);
+    }, (error) => {
+      console.log('tidak dapat koordinat GPS');
+      console.log(error);
+    });
+    
+  }
+```
+
+full-code akan menjadi seperti dibawah ini
+```javascript
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { Geolocation } from 'ionic-native';
+
+declare var google;
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+ 
+  constructor(public navCtrl: NavController) {
+ 
+  }
+ 
+  ionViewDidEnter(){
+    this.loadMap();
+  }
+ 
+  loadMap(){
+ 
+    let latLng = new google.maps.LatLng(-6.226267, 106.825374);
+ 
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+ 
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    google.maps.event.trigger(this.map, 'resize');
+ 
+  }
+
+  getLocation(){
+    let locationOptions = {timeout: 10000, enableHighAccuracy: true};
+    
+    Geolocation.getCurrentPosition(locationOptions).then((position) => {
+      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      this.map.panTo(latLng);
+    }, (error) => {
+      console.log('tidak dapat koordinat GPS');
+      console.log(error);
+    });
+    
+  }
+
+  addMarker(){
+ 
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+    let content = "<h4>Disini itu apa?</h4>";          
+ 
+    this.addInfoWindow(marker, content);
+  }
+
+  addInfoWindow(marker, content){
+ 
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+  
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+  
+  }
+
+}
+```
+Jalankan di browser untuk mencoba, tekan tombol di header untuk mendapatkan posisi koordinat
+### Perhatian
+Ada kalanya tidak berhasil mendapatkan koordinat GPS, ada beberapa penyebabnya
+* Di dalam ruangan
+* Menggunakan Wifi
+* Tidak menggunakan localhost
 
 ---
 
 ## Tutorial Step 5
 
-Coming soon
+Oke, step terakhir di tutorial ini. Fitur baru di aplikasi kita adalah menambahkan `marker` dengan hanya tap di peta.
 
+Kita akan menggunakan Google Maps Events yaitu `onclick`. List semua events di Google Maps bisa di cek di https://developers.google.com/maps/documentation/javascript/reference
+Search dengan `cmd + f` (macOS) atau `ctrl + f` dan masukkan "events".
+
+Edit file `home.ts` dan tambahkan sedikit kode berikut di dalam `loadMap()`
+```javascript
+google.maps.event.addListener(this.map, 'click', (event) => {
+      let marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: event.latLng
+      });
+    });
+```
+
+full-code seperti dibawah ini
+```javascript
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { Geolocation } from 'ionic-native';
+declare var google;
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+ 
+  constructor(public navCtrl: NavController) {
+ 
+  }
+ 
+  ionViewDidEnter(){
+    this.loadMap();
+  }
+ 
+  loadMap(){
+ 
+    let latLng = new google.maps.LatLng(-6.226267, 106.825374);
+ 
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+ 
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    google.maps.event.addListener(this.map, 'click', (event) => {
+      let marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: event.latLng
+      });
+    });
+
+
+    google.maps.event.trigger(this.map, 'resize');
+ 
+  }
+
+  getLocation(){
+    let locationOptions = {timeout: 10000, enableHighAccuracy: true};
+    
+    Geolocation.getCurrentPosition(locationOptions).then((position) => {
+      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      this.map.panTo(latLng);
+    }, (error) => {
+      console.log('tidak dapat koordinat GPS');
+      console.log(error);
+    });
+    
+  }
+
+  addMarker(){
+ 
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
+
+    let content = "<h4>Disini itu apa?</h4>";          
+ 
+    this.addInfoWindow(marker, content);
+  }
+
+  addInfoWindow(marker, content){
+ 
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+  
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+  
+  }
+
+}
+```
+Jalankan di browser Anda dan coba tap pada peta. Cool, isn't? 
+
+---
+## Tutorial Step 6
+Ini adalah the best part dari tutorial ini, kita akan membuat aplikasi Android dalam bentuk APK!
+
+Jika **pre-requisite** sudah diinstall semua dan kita siap membuat APK.
+Ketik perintah dibawah untuk membuat APK
+```
+ionic build android
+```
+
+Jika Anda memakai Mac dan sudah menginstall XCode terbaru, ketik perintah
+```
+ionic build ios
+```
+Ingat, iOS hanya bisa dilakukan di Mac. Kita tidak bisa membuat aplikasi iOS di Windows atau Linux. Tapi Mac bisa membuat semua aplikasi.
+
+Setelah melakukan perintah di atas, tunggu sejenak dan pastikan tidak ada error. Hasil APK akan berada di
+```
+C:\PATH_KE_FOLDER\starter-maps\platforms\android\build\outputs\apk\android-debug.apk
+```
+Copy APK tersebut ke Android dan coba jalankan. Selamat! Anda sudah berhasil membuat aplikasi Android menggunakan Google Maps.
+Hasil akhir aplikasi bisa diunduh di http://bit.ly/2fkhMKo
+
+## BONUS
+Bagaimana jika kita tidak bisa atau tidak ada Android SDK dan ingin mencoba aplikasi yang kita buat di Android atau iPhone? bisa gak ya?
+
+BISA!
+
+Gunakan fitur Ionic View. Download aplikasi Ionic View di
+* Google Play Store https://play.google.com/store/apps/details?id=com.ionic.viewapp&hl=en
+* AppStore  https://itunes.apple.com/us/app/ionic-view/id849930087?mt=8
+
+Install di Android atau iPhone Anda, lakukan pendaftaran melalui Aplikasi Ionic View atau melalui website www.ionic.io
+
+Jika sudah mendaftar, pada folder project Anda lakukan perintah dibawah ini
+```
+ionic upload
+```
+
+Masukkan email dan password Ionic View (ionic.io) anda di command line dan tunggu aplikasi Anda diunggah ke server Ionic.
+
+Jika sudah selesai, buka aplikasi Ionic View di Android dan iPhone kemudian login. Aplikasi Anda akan tampil pada list di Ionic View. Tap saja dan pilih "View App".
+
+Aplikasi ionic Anda sekarang bisa diuji coba di Android dan iOS tanpa perlu lakukan Build.
+
+#### Catatan Tentang Ionic View
+* Tidak semua plugin Ionic Native disupport di dalam Ionic View
+* Setiap Anda melakukan perintah `ionic upload` dan perubahan di Ionic View tidak ada, lakukan clear data pada menu ionic View dan lakukan download ulang dengan memilih "View App"
+* Anda bisa membagikan Aplikasi dengan mencatat AppID pada Ionic View. Berikan AppID tersebut kepada teman yang sudah menginstall Ionic View. Tap pada icon "mata" dan masukkan AppID.
+* Ionic View ini berguna jika Anda ingin melakukan Prototyping tanpa perlu melakukan Build
+
+## Useful Links
+* Git Repo for current session https://gitlab.com/pradita.utama/starter-maps
+* Google Developer Console https://console.developers.google.com/
+* Google Maps Style Wizards https://snazzymaps.com/
+* Google Maps V3 Javascript Reference https://developers.google.com/maps/documentation/javascript/reference
+* Ionic2 Documentation http://ionicframework.com/docs/v2/
