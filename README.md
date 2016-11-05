@@ -731,6 +731,8 @@ Jika sudah selesai, buka aplikasi Ionic View di Android dan iPhone kemudian logi
 
 Aplikasi ionic Anda sekarang bisa diuji coba di Android dan iOS tanpa perlu lakukan Build.
 
+---
+
 #### Catatan Tentang Ionic View
 * Tidak semua plugin Ionic Native disupport di dalam Ionic View
 * Setiap Anda melakukan perintah `ionic upload` dan perubahan di Ionic View tidak ada, lakukan clear data pada menu ionic View dan lakukan download ulang dengan memilih "View App"
