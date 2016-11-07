@@ -215,22 +215,6 @@ export class HomePage {
 
 Decorator @ViewChild digunakan untuk "mencari" element di HTML yang mempunya nama "#map", dengan @ViewChild kita bisa akses DOM element tersebut dan memanipulasinya setiap saat. @ViewChild harus kita import dari `angular/core`
 
-```javascript
-...
-
-let mapOptions = {
-  center: latLng,
-  zoom: 15,
-  mapTypeId: google.maps.MapTypeId.ROADMAP
-}
-    
-...
-```
-variable `mapOptions` mempunyai banyak sekali option dan konfigurasi, bisa dilihat di https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-Jika ingin menampilkan peta dengan tampilan berbeda, bisa gunakan website generator berikut ini dan copy semua optionnya ke `mapOptions`
-
-https://snazzymaps.com/
-
 
 ```javascript
 ...
@@ -248,6 +232,26 @@ ionViewDidEnter(){
 Kode diatas menggunakan `ionViewDidEnter` karena menjamin view saat ini yaitu halaman `home.html` telah sepenuhnya load. Jika kita taruh didalam `constructor` tidak ada jaminan `<div #map id="map"></div>` sudah siap sebelum Google Map load. Jika Google Maps load terlebih dahulu sedangkan `<div #map id="map"></div>` belum load, akan menjadi undefined.
 
 Sekarang, coba jalankan perintah dibawah ini
+
+
+### Mengubah Tampilan Peta
+```javascript
+...
+
+let mapOptions = {
+  center: latLng,
+  zoom: 15,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+    
+...
+```
+variable `mapOptions` mempunyai banyak sekali option dan konfigurasi, bisa dilihat di https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+Jika ingin menampilkan peta dengan tampilan berbeda, bisa gunakan website generator berikut ini dan copy semua optionnya ke `mapOptions`
+
+https://snazzymaps.com/
+
+
 ```
 ionic serve --lab
 ```
