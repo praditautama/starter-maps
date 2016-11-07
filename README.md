@@ -94,6 +94,14 @@ Sideload atau install ke Android menggunakan kabel data.
 Tutorial ini menghasilkan aplikasi peta menggunakan Google Maps dengan fitur GeoLocation dan menambahkan `marker` hanya dengan tap di peta.
 Download aplikasi Androidnya di http://bit.ly/2fkhMKo 
 
+Sourc code final ada di branch `step5`
+
+https://gitlab.com/pradita.utama/starter-maps/branches
+
+```
+git checkout step5
+```
+
 ---
 
 # Tutorial Step 1
