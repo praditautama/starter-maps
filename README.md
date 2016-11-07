@@ -218,6 +218,23 @@ Decorator @ViewChild digunakan untuk "mencari" element di HTML yang mempunya nam
 ```javascript
 ...
 
+let mapOptions = {
+  center: latLng,
+  zoom: 15,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+    
+...
+```
+variable `mapOptions` mempunyai banyak sekali option dan konfigurasi, bisa dilihat di https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+Jika ingin menampilkan peta dengan tampilan berbeda, bisa gunakan website generator berikut ini dan copy semua optionnya ke `mapOptions`
+
+https://snazzymaps.com/
+
+
+```javascript
+...
+
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
 ...
@@ -812,3 +829,4 @@ ionic upload
 * Google Maps V3 Javascript Reference https://developers.google.com/maps/documentation/javascript/reference
 * Ionic2 Documentation http://ionicframework.com/docs/v2/
 * Angular2 Documentation https://angular.io/
+* Belajar singkat Angular2 http://learnangular2.com/
