@@ -1,5 +1,8 @@
 # Google Maps Tutorial Menggunakan Ionic2
 
+NOTE: 
+This is outdated repo / tutorial
+
 Tutorial membuat aplikasi hybrid menggunakan Ionic dan Angular2. 
 Level : Beginner
 
