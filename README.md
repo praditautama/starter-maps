@@ -830,7 +830,7 @@ ionic upload
 ```
 
 ## Useful Links
-* Git Repo for current session https://gitlab.com/pradita.utama/starter-maps
+* Git Repo for current session https://www.github.com/praditautama/starter-maps
 * Google Developer Console https://console.developers.google.com/
 * Google Maps Style Wizards https://snazzymaps.com/
 * Google Maps V3 Javascript Reference https://developers.google.com/maps/documentation/javascript/reference
